@@ -22,6 +22,7 @@ export class UsersController {
 
   @Post()
   async create(@Body() createUserDto: CreateUserDto) {
+    
     const createdUser = await this.usersService.create(createUserDto);
     return new CustomApiResponse(200, 'User created succesfully', createdUser);
   }
