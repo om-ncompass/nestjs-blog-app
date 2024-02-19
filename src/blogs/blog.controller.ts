@@ -19,6 +19,7 @@ import { CreateBlogDto } from './dto/create-blog.dto';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { CustomApiResponse } from 'src/utils/send-response';
 import { UpdateBlogDto } from './dto/update-blog.dto';
+import { TopicService } from 'src/topic/topic.service';
 
 @Controller('blog')
 export class BlogController {
