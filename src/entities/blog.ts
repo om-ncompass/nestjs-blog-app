@@ -1,19 +1,19 @@
-import { BeforeInsert, Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryColumn, UpdateDateColumn} from "typeorm";
+import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn} from "typeorm";
+
 import { Topic } from "./topic";
-import { v4 as uuidv4 } from 'uuid'
 
 @Entity() 
 export class Blog {
     @ManyToOne(() => Topic, topic => topic.blog)
     topic: Topic;
 
-    @PrimaryColumn('uuid') 
+    @PrimaryGeneratedColumn('uuid') 
     blogId: string;
 
-    @BeforeInsert() 
-    beforeInsertFunc() {
-        this.blogId = uuidv4();
-    }
+    // @BeforeInsert() 
+    // beforeInsertFunc() {
+    //     this.blogId = uuidv4();
+    // }
 
     @Column()
     topicId: string;
@@ -24,13 +24,13 @@ export class Blog {
     @Column()
     name: string;
 
-    @Column()
+    @Column({ type: 'text' })
     desc: string;
 
     @Column()
     header: string;
 
-    @Column()
+    @Column({ type: 'text' })
     body: string;
 
     @Column()

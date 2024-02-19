@@ -1,16 +1,16 @@
-import { BeforeInsert, Column, Entity, JoinColumn, OneToMany, PrimaryColumn} from "typeorm";
-import { v4 as uuidv4 } from 'uuid'
+import { Column, Entity, JoinColumn, OneToMany, PrimaryGeneratedColumn} from "typeorm";
+
 import { Blog } from "./blog";
 
 @Entity() 
 export class Topic {
-    @PrimaryColumn('uuid') 
+    @PrimaryGeneratedColumn('uuid') 
     topicId: string;
 
-    @BeforeInsert() 
-    beforeInsertFunc() {
-        this.topicId = uuidv4();
-    }
+    // @BeforeInsert() 
+    // beforeInsertFunc() {
+    //     this.topicId = uuidv4();
+    // }
 
     @Column()
     userId: string;
@@ -28,7 +28,5 @@ export class Topic {
     @OneToMany(() => Blog, blog => blog.topic) 
     @JoinColumn()
     blog: Blog;
-
     
-
 }

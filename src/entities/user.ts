@@ -1,8 +1,4 @@
-import { BeforeInsert, Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn} from "typeorm";
-// import { Role } from "./role";
-import { Editor } from "./editor";
-import { Viewer } from "./viewer";
-import * as md5 from 'md5';
+import { Column, Entity, PrimaryGeneratedColumn} from "typeorm";
 
 @Entity({ name: 'users' })
 export class User {
@@ -18,11 +14,6 @@ export class User {
   @Column()
   password: string;
 
-  @BeforeInsert()
-  hashPassword() {
-      this.password = md5(this.password);
-  }
-
   @Column()
   firstName: string;
 
@@ -32,11 +23,14 @@ export class User {
   @Column({ default: 4 })
   roleId: number;
 
-  @OneToOne(() => Editor, (editor) => editor.user)
-  @JoinColumn()
-  editor: Editor;
+  // @ManyToOne(() => Role, role => role.roleId)
+  // role: Role;
 
-  @OneToOne(() => Viewer, (viewer) => viewer.user)
-  @JoinColumn()
-  viewer: Viewer;
+  // @OneToOne(() => Editor, (editor) => editor.user)
+  // @JoinColumn()
+  // editor: Editor;
+
+  // @OneToOne(() => Viewer, (viewer) => viewer.user)
+  // @JoinColumn()
+  // viewer: Viewer;
 }

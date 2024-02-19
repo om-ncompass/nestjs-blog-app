@@ -1,20 +1,18 @@
-import { Module } from '@nestjs/common';
+import { Module} from '@nestjs/common';
+import { APP_FILTER } from '@nestjs/core';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { User } from './entities/user';
-import { Topic } from './entities/topic';
-import { Blog } from './entities/blog';
-import { Editor } from './entities/editor';
-import { Viewer } from './entities/viewer';
-import { ConfigModule, ConfigService } from '@nestjs/config';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { GlobalExceptionFilter } from './utils/error-handler';
-import { APP_FILTER } from '@nestjs/core';
+import { BlogModule } from './blogs/blog.module';
 import { TopicModule } from './topic/topic.module';
 import { ConfigDatabaseModule } from './config/config.module';
 import { databaseConfig } from './config/db.config';
+import { RoleModule } from './role/role.module';
 
 @Module({
   imports: [
@@ -28,9 +26,11 @@ import { databaseConfig } from './config/db.config';
     }), 
     UsersModule,
     AuthModule,
-    TopicModule
+    BlogModule,
+    TopicModule,
+    RoleModule,
   ],
   controllers: [AppController],
   providers: [AppService, {provide:APP_FILTER, useClass: GlobalExceptionFilter}],
 })
-export class AppModule {}
+export class AppModule {};
